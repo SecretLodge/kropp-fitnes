@@ -107,6 +107,7 @@ svg * {
 
 :root {
     --color-dark: #000000;
+    --color-dark-alternate: #131619;
     --color-light: #ffffff;
     --color-dark-gray: #404040;
     --color-light-gray: #c4c4c4;
@@ -123,6 +124,8 @@ svg * {
     --container-padding-x: 15px;
 
     --transition-duration: 0.2s;
+
+    --header-height: 90px;
 }
 
 body {
@@ -146,6 +149,14 @@ a {
     color: var(--color-light);
 }
 
+p {
+    margin-block: 0;
+}
+
+p:not([class]):not(:last-child) {
+    margin-bottom: 24px;
+}
+
 a:hover {
     color: var(--color-light-gray);
 }
@@ -166,6 +177,53 @@ h6 {
     padding-inline: var(--container-padding-x);
 }
 
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
+}
+
+.title-medium {
+    font-size: 40px;
+    line-height: 1.3;
+    color: var(--color-light);
+}
+
+.backdrop-title {
+    position: relative;
+    z-index: 2;
+}
+
+.backdrop-title::before {
+    content: '';
+    position: absolute;
+    right: calc(100% + 8px);
+    display: block;
+    width: 26px;
+    aspect-ratio: 1;
+    background: url('./icons/plus.svg') center / contain no-repeat;
+}
+
+.backdrop-title::after {
+    content: attr(data-title);
+    position: absolute;
+    z-index: -1;
+    top: -0.45em;
+    left: -0.6em;
+    font-family: var(--font-family-accent);
+    font-size: 2.8em;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-dark-gray);
+    text-stroke: 1px var(--color-dark-gray);
+}
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -180,9 +238,35 @@ h6 {
     border: none;
     border-radius: var(--border-radius);
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .button:hover {
+    background-color: var(--color-light-gray);
+}
+
+.button.transparent {
+    height: var(--input-height);
+    padding-left: 30px;
+    padding-right: 80px;
+    background-color: transparent;
+    border: var(--border);
+    position: relative;
+}
+
+.button.transparent::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 100%;
+    aspect-ratio: 1;
+    border: var(--border);
+    border-radius: 50%;
+    background: url('./icons/arrow-top-right.svg') center / 70% no-repeat;
+}
+
+.button.transparent:hover {
+    color: var(--color-dark);
     background-color: var(--color-light-gray);
 }
 
@@ -192,6 +276,8 @@ h6 {
     align-items: center;
     column-gap: 20px;
     padding-inline: 32px;
+    min-height: var(--header-height);
+    background-color: var(--color-dark-alternate);
 }
 
 .header-logo {
@@ -209,7 +295,7 @@ h6 {
 }
 
 .header-menu-link {
-    height: 90px;
+    height: var(--header-height);
     display: inline-flex;
     align-items: center;
     text-transform: uppercase;
@@ -223,8 +309,8 @@ h6 {
     position: absolute;
     left: 45px;
     content: '';
-    height: 5px;
     width: 5px;
+    aspect-ratio: 1;
     background-color: currentColor;
     border-radius: 50%;
 }
@@ -242,9 +328,9 @@ h6 {
     padding-left: 8px;
     background-color: transparent;
     border: var(--border);
-    border-radius: var(--border-radius);
+    border-radius: 50%;
     height: 40px;
-    width: 40px;
+    aspect-ratio: 1;
     color: var(--color-light);
 }
 
@@ -260,12 +346,130 @@ h6 {
     box-shadow: 16px 0 0 0 currentColor;
 }
 
+.banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    min-height: calc(100vh - var(--header-height));
+    padding: 36px 70px;
+    color: var(--color-light);
+    background-color: var(--color-dark-alternate);
+}
+
+.banner-body {
+    text-transform: uppercase;
+}
+
+.banner-info {
+    display: flex;
+    align-items: end;
+    font-size: clamp(16px, 1.56vw, 30px);
+    line-height: 1.27;
+    font-weight: 700;
+}
+
+.banner-info::before {
+    content: '';
+    width: clamp(60px, 10.1vw, 194px);
+    aspect-ratio: 1;
+    margin-right: 30px;
+    background: url('./icons/bold-arrow-down-right.svg') center / contain
+        no-repeat;
+}
+
+.banner-title {
+    font-size: min(18.75vw, 360px);
+    line-height: 1;
+}
+
+.banner-pagination-list {
+    display: flex;
+    justify-content: center;
+}
+
+.banner-pagination-item {
+    display: flex;
+}
+
+.banner-pagination-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    padding: 7px;
+}
+
+.banner-pagination-button::after {
+    content: '';
+    width: 10px;
+    aspect-ratio: 1;
+    border: var(--border);
+    border-radius: 50%;
+    transition-duration: var(--transition-duration);
+}
+
+.banner-pagination-button.is-current::after {
+    background-color: var(--color-light);
+}
+
+.banner-pagination-button:not(.is-current):hover::after {
+    border-color: var(--color-light-gray);
+}
+
+.motivation-item:nth-child(even) {
+    background-color: var(--color-dark-alternate);
+}
+
+.motivation-item:nth-child(even) .motivation-card {
+    flex-direction: row-reverse;
+}
+
+.motivation-card {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: clamp(30px, 10.42vw, 200px);
+}
+
+.motivation-card-image {
+    margin-block: -60px;
+}
+
+.motivation-card-body {
+    padding-left: 35px;
+}
+
+.motivation-card-title:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.motivation-card-description {
+    max-width: 400px;
+}
+
+.motivation-card-description:not(:last-child) {
+    margin-bottom: 37px;
+}
+
 @media (max-width: 1024px) {
     .header {
         flex-wrap: wrap;
         row-gap: 10px;
         padding-top: 20px;
+    }
+
+    .header,
+    .banner {
         padding-inline: 15px;
+    }
+
+    .banner {
+        column-gap: 10px;
+    }
+
+    .banner-info::before {
+        margin-right: 15px;
     }
 
     .header-menu {
@@ -297,5 +501,13 @@ h6 {
 
     .header-actions {
         column-gap: 15px;
+    }
+
+    .banner-info::before {
+        margin-right: 10px;
+    }
+
+    .banner-info {
+        margin-bottom: 5px;
     }
 }
