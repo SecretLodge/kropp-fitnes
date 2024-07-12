@@ -538,7 +538,7 @@ h6 {
     }
 
     .motivation-card-image {
-        max-width: 60%;
+        max-width: 100%;
     }
 
     .motivation-card-description:not(:last-child) {
