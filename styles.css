@@ -80,6 +80,10 @@ button {
     font: inherit;
 }
 
+button {
+    user-select: none;
+}
+
 html {
     height: 100%;
 }
@@ -196,6 +200,10 @@ h6 {
     line-height: 1.3;
 }
 
+.title-big {
+    font-size: clamp(24px, 3.12vw, 60px);
+}
+
 .backdrop-title {
     position: relative;
     z-index: 2;
@@ -224,6 +232,12 @@ h6 {
     text-stroke: 1px var(--color-dark-gray);
 }
 
+.backdrop-title.centered::after {
+    top: -0.55em;
+    left: 50%;
+    translate: -50% 0;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -250,6 +264,7 @@ h6 {
     padding-left: 30px;
     padding-right: 80px;
     background-color: transparent;
+    color: var(--color-light);
     border: var(--border);
     position: relative;
 }
@@ -268,6 +283,30 @@ h6 {
 .button.transparent:hover {
     color: var(--color-dark);
     background-color: var(--color-light-gray);
+}
+
+.input {
+    height: var(--input-height);
+    padding-inline: 25px;
+    width: 100%;
+    color: var(--color-light);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-light-gray);
+    background-color: transparent;
+}
+
+.input::placeholder {
+    color: var(--color-light-gray);
+}
+
+.input:hover {
+    border-color: var(--color-light);
+}
+
+.input:focus {
+    outline: none;
+    background-color: var(--color-light-gray);
+    color: var(--color-dark);
 }
 
 .header {
@@ -479,6 +518,111 @@ h6 {
         var(--trainingTypesItemBgIconSize) no-repeat;
 }
 
+.join-us-video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./images/join-us-bg.jpg') center / cover no-repeat
+        var(--color-dark-alternate);
+    padding: 150px 30px;
+}
+
+.join-us-video {
+    max-width: 960px;
+    width: 100%;
+    height: auto;
+}
+
+.join-us-video-play-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    column-gap: 4px;
+    width: 200px;
+    aspect-ratio: 1;
+    background-color: transparent;
+    border: var(--border);
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-light);
+    text-transform: uppercase;
+}
+
+.join-us-video-play-button::after {
+    content: '';
+    width: 26px;
+    aspect-ratio: 1;
+    background: url('./icons/arrow-top-right.svg') center / contain no-repeat;
+    transition-duration: var(--transition-duration);
+}
+
+.join-us-video-play-button:hover {
+    color: var(--color-dark);
+    background-color: var(--color-light-gray);
+}
+
+.join-us-video-play-button:hover::after {
+    filter: invert(1);
+}
+
+.join-us-body {
+    padding-bottom: 150px;
+}
+
+.join-us-title {
+    position: relative;
+    margin-top: -0.4em;
+    font-size: clamp(64px, 9.37vw, 180px);
+    line-height: 1;
+    text-align: center;
+}
+
+.join-us-title::after {
+    content: '';
+    display: inline-block;
+    height: 0.7em;
+    aspect-ratio: 1;
+    margin-left: 0.14em;
+    background: url('./icons/bold-arrow-down-right.svg') center / contain
+        no-repeat;
+    scale: 1 -1;
+}
+
+.join-us-title:not(:last-child) {
+    margin-bottom: 130px;
+}
+
+.join-us-form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 7px;
+}
+
+.join-us-form-header:not(:last-child) {
+    margin-bottom: 52px;
+}
+
+.join-us-form-subtitle {
+    font-size: 20px;
+    line-height: 1.65;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-light);
+}
+
+.join-us-form-body {
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.join-us-form-input {
+    max-width: 400px;
+}
+
 @media (max-width: 1919px) {
     .motivation-card-image {
         margin-block: -20px;
@@ -528,6 +672,14 @@ h6 {
         max-width: 30%;
         height: auto;
         margin-block: 0;
+    }
+
+    .join-us-body {
+        padding-bottom: 80px;
+    }
+
+    .join-us-title:not(:last-child) {
+        margin-bottom: 80px;
     }
 }
 
@@ -591,5 +743,23 @@ h6 {
 
     .training-types-image {
         max-width: 120px;
+    }
+
+    .join-us-video-play-button {
+        width: 140px;
+    }
+
+    .join-us-title:not(:last-child) {
+        margin-bottom: 30px;
+    }
+
+    .join-us-form-subtitle {
+        font-size: 16px;
+    }
+
+    .join-us-form-body {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
     }
 }
