@@ -518,6 +518,10 @@ h6 {
         var(--trainingTypesItemBgIconSize) no-repeat;
 }
 
+.join-us {
+    background-color: var(--color-dark-alternate);
+}
+
 .join-us-video-wrapper {
     display: flex;
     justify-content: center;
